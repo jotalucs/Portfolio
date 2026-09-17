@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>João Lucas (JJ) — Portfólio Pessoal</title>
+  <meta name="description" content="Portfólio de João Lucas (JJ), estudante de Informática para Internet de Varginha.">
+
+  <!-- Carregamento das fontes escolhidas no Google Fonts: Space Grotesk e Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================================
+       VARIÁVEIS DE COR E PALETA (Rubro-Negra "Minha própria")
+       ========================================================= */
+    :root {
+      /* Tema Escuro (Padrão) */
+      --cor-fundo: #0e0304;              /* Rubro-negro bem escuro */
+      --cor-texto: #ff3b47;              /* Vermelho intenso para destaques/títulos */
+      --cor-texto-corpo: #f0f0f0;        /* Texto claro legível */
+      --cor-primaria: #e5162c;           /* Vermelho Flamengo */
+      --cor-secundaria: #000000;         /* Preto puro */
+      --cor-destaque: #5c0a12;           /* Vinho escuro */
+      --cor-card-bg: #180507;           /* Fundo dos cards */
+      --cor-card-frente: #1f0709;        /* Frente do card */
+      --cor-card-verso: #2a0a0d;         /* Verso do card */
+      --cor-borda: #e5162c;
+      
+      --fonte-titulo: 'Space Grotesk', sans-serif;
+      --fonte-corpo: 'Inter', sans-serif;
+      
+      --sombra-dura: 4px 4px 0px var(--cor-secundaria);
+      --borda-padrao: 2px solid var(--cor-borda);
+      --altura-nav: 60px;
+    }
+
+    /* Tema Claro Aprimorado */
+    [data-theme="light"] {
+      --cor-fundo: #f8f9fa;              /* Fundo claro, suave e limpo */
+      --cor-texto: #c8102e;              /* Vermelho vibrante de alto contraste */
+      --cor-texto-corpo: #111827;        /* Escuro profundo para máxima legibilidade */
+      --cor-primaria: #d3081e;           /* Vermelho Flamengo principal */
+      --cor-secundaria: #ffffff;         /* Branco puro */
+      --cor-destaque: #fee2e2;           /* Vermelho suave para cards/detalhes */
+      --cor-card-bg: #ffffff;           /* Cards limpos com fundo branco */
+      --cor-card-frente: #ffffff;
+      --cor-card-verso: #fff1f2;         /* Verso levemente rosado */
+      --cor-borda: #111827;              /* Bordas pretas marcadas */
+      --sombra-dura: 4px 4px 0px #111827;/* Sombra neo-brutalista preta */
+    }
+
+    /* =========================================================
+       RESET E ESTILOS BASE
+       ========================================================= */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--cor-fundo);
+      color: var(--cor-texto-corpo);
+      font-family: var(--fonte-corpo);
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: background-color 0.4s ease, color 0.4s ease;
+    }
+
+    h1, h2, h3, .tom-descontraido {
+      font-family: var(--fonte-titulo);
+      color: var(--cor-texto);
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:focus-visible, button:focus-visible, input:focus-visible + .slider {
+      outline: 3px solid var(--cor-texto);
+      outline-offset: 3px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* =========================================================
+       BARRA DE PROGRESSO DE LEITURA
+       ========================================================= */
+    .barra-progresso {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 5px;
+      background-color: var(--cor-primaria);
+      width: 0%;
+      z-index: 1000;
+      transition: width 0.1s linear;
+    }
+
+    /* =========================================================
+       NAVEGAÇÃO FIXA COM INTERRUPTOR (SWITCH)
+       ========================================================= */
+    .nav-fixa {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--altura-nav);
+      background-color: var(--cor-fundo);
+      border-bottom: 2px solid var(--cor-primaria);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      transition: background-color 0.4s ease;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .nav-logo {
+      font-family: var(--fonte-titulo);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--cor-texto);
+    }
+
+    .nav-direita {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--cor-primaria);
+    }
+
+    /* ESTILO DO INTERRUPTOR (TOGGLE SWITCH) */
+    .theme-switch-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .theme-switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 26px;
+    }
+
+    .theme-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #1a1a1a;
+      border: 2px solid var(--cor-primaria);
+      transition: background-color 0.3s ease;
+      box-shadow: 2px 2px 0px var(--cor-secundaria);
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 3px;
+      bottom: 3px;
+      background-color: var(--cor-primaria);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    input:checked + .slider {
+      background-color: #ffffff;
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(24px);
+    }
+
+    .btn-quadrado {
+      background-color: var(--cor-primaria);
+      color: #ffffff;
+      border: var(--borda-padrao);
+      box-shadow: var(--sombra-dura);
+      padding: 0.5rem 1rem;
+      font-family: var(--fonte-titulo);
+      font-weight: 700;
+      cursor: pointer;
+      border-radius: 0;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: inline-block;
+    }
+
+    .btn-quadrado:hover {
+      transform: translate(-2px, -2px);
+    }
+
+    .btn-quadrado:active {
+      transform: translate(2px, 2px);
+    }
+
+    /* =========================================================
+       HERO / TOPO
+       ========================================================= */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding-top: var(--altura-nav);
+      overflow: hidden;
+    }
+
+    #canvas-particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.2rem;
+      pointer-events: none;
+    }
+
+    .hero-content * {
+      pointer-events: auto;
+    }
+
+    .avatar-circulo {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      border: 3px solid var(--cor-primaria);
+      box-shadow: var(--sombra-dura);
+      object-fit: cover;
+      background-color: var(--cor-destaque);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--fonte-titulo);
+      font-size: 2.5rem;
+      color: var(--cor-texto-corpo);
+    }
+
+    .nome-gigante {
+      font-size: clamp(3.2rem, 10vw, 7.5rem);
+      line-height: 0.95;
+      color: var(--cor-texto);
+      text-shadow: 3px 3px 0px var(--cor-secundaria);
+    }
+
+    .frase-hero {
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      max-width: 700px;
+      font-weight: 600;
+      color: var(--cor-texto-corpo);
+    }
+
+    .pills-container {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 0.5rem;
+    }
+
+    .pill {
+      background-color: var(--cor-destaque);
+      color: var(--cor-texto-corpo);
+      border: 1px solid var(--cor-primaria);
+      padding: 0.3rem 0.9rem;
+      font-weight: 700;
+      font-size: 0.85rem;
+      font-family: var(--fonte-titulo);
+    }
+
+    /* =========================================================
+       DIVISÓRIA ZIGUE-ZAGUE
+       ========================================================= */
+    .divisoria-ziguezague {
+      height: 24px;
+      width: 100%;
+      background: linear-gradient(135deg, var(--cor-primaria) 25%, transparent 25%) -12px 0,
+                  linear-gradient(225deg, var(--cor-primaria) 25%, transparent 25%) -12px 0,
+                  linear-gradient(315deg, var(--cor-primaria) 25%, transparent 25%),
+                  linear-gradient(45deg, var(--cor-primaria) 25%, transparent 25%);
+      background-size: 24px 24px;
+      background-color: var(--cor-fundo);
+      margin: 2rem 0;
+    }
+
+    /* =========================================================
+       SEÇÃO: SOBRE MIM
+       ========================================================= */
+    .secao {
+      padding: 3.5rem 0;
+    }
+
+    .titulo-secao {
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: 1.5rem;
+      display: inline-block;
+      border-bottom: 4px solid var(--cor-primaria);
+    }
+
+    .caixa-exclusiva {
+      background-color: var(--cor-card-bg);
+      border: var(--borda-padrao);
+      box-shadow: var(--sombra-dura);
+      padding: 1.5rem;
+      margin-bottom: 3rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .item-exclusivo {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .item-exclusivo .rotulo {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--cor-texto);
+      letter-spacing: 0.05em;
+    }
+
+    .item-exclusivo .valor {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .sobre-paragrafos p {
+      font-size: 1.15rem;
+      margin-bottom: 1.2rem;
+      max-width: 850px;
+    }
+
+    /* =========================================================
+       SEÇÃO: ENTREGAS (CARDS VIRA-CARD)
+       ========================================================= */
+    .grade-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .card-flip {
+      background-color: transparent;
+      height: 360px;
+      perspective: 1000px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .card-flip.revelado {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: left;
+      transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transform-style: preserve-3d;
+      border: var(--borda-padrao);
+      box-shadow: var(--sombra-dura);
+      cursor: pointer;
+    }
+
+    .card-flip:hover .card-inner,
+    .card-flip:focus-within .card-inner,
+    .card-inner.virado {
+      transform: rotateY(180deg);
+    }
+
+    .card-frente, .card-verso {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+
+    .card-frente {
+      background-color: var(--cor-card-frente);
+    }
+
+    .card-imagem-container {
+      width: 100%;
+      height: 140px;
+      background-color: var(--cor-destaque);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 1px solid var(--cor-primaria);
+    }
+
+    .card-imagem-svg {
+      width: 60px;
+      height: 60px;
+      fill: var(--cor-texto);
+      transition: transform 0.5s ease;
+    }
+
+    .card-flip:hover .card-imagem-svg {
+      transform: scale(1.2);
+    }
+
+    .card-numero {
+      font-family: var(--fonte-titulo);
+      font-size: 0.9rem;
+      color: var(--cor-texto);
+    }
+
+    .card-titulo {
+      font-size: 1.3rem;
+      margin-top: 0.5rem;
+    }
+
+    .selo-status {
+      align-self: flex-start;
+      padding: 0.2rem 0.6rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-family: var(--fonte-titulo);
+    }
+
+    .selo-concluida {
+      background-color: #10b981;
+      color: #000000;
+    }
+
+    .selo-em-breve {
+      background-color: #6b7280;
+      color: #ffffff;
+    }
+
+    .dica-virar {
+      font-size: 0.75rem;
+      opacity: 0.7;
+      text-align: right;
+      font-style: italic;
+    }
+
+    .card-verso {
+      background-color: var(--cor-card-verso);
+      transform: rotateY(180deg);
+    }
+
+    .card-data {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--cor-texto);
+    }
+
+    .card-aprendizado {
+      font-size: 0.95rem;
+      margin: 1rem 0;
+    }
+
+    .card-flip.em-breve-card {
+      opacity: 0.6;
+    }
+
+    .card-flip.em-breve-card .card-inner {
+      cursor: not-allowed;
+    }
+
+    .link-desativado {
+      font-size: 0.85rem;
+      color: #888888;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    /* =========================================================
+       SEÇÃO: MANIFESTO
+       ========================================================= */
+    .manifesto-wrapper {
+      background-color: var(--cor-card-bg);
+      border: var(--borda-padrao);
+      box-shadow: var(--sombra-dura);
+      padding: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .manifesto-conteudo {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.6s cubic-bezier(0, 1, 0, 1);
+    }
+
+    .manifesto-conteudo.aberto {
+      max-height: 2000px;
+      transition: max-height 0.8s ease-in-out;
+    }
+
+    .manifesto-texto p {
+      margin-bottom: 1rem;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    .btn-manifesto {
+      margin-top: 1rem;
+    }
+
+    /* =========================================================
+       RODAPÉ
+       ========================================================= */
+    .rodape {
+      background-color: var(--cor-secundaria);
+      color: #ffffff;
+      padding: 3rem 0;
+      border-top: 4px solid var(--cor-primaria);
+      margin-top: 4rem;
+    }
+
+    [data-theme="light"] .rodape {
+      background-color: #111827;
+    }
+
+    .rodape-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .rodape-info h3 {
+      font-size: 1.5rem;
+      color: #ffffff;
+    }
+
+    .rodape-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    /* REDUCED MOTION */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      #canvas-particles { display: none; }
+      .card-flip { opacity: 1 !important; transform: none !important; }
+    }
+
+    /* RESPONSIVIDADE */
+    @media (max-width: 600px) {
+      .nav-links { gap: 0.8rem; }
+      .nav-links a { font-size: 0.85rem; }
+      .nome-gigante { font-size: 2.8rem; }
+      .secao { padding: 2.5rem 0; }
+      .grade-cards { grid-template-columns: 1fr; }
+      .rodape-grid { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="barra-progresso" id="barra-progresso" aria-hidden="true"></div>
+
+  <!-- Navegação com Interruptor de Tema -->
+  <header class="nav-fixa">
+    <div class="container nav-container">
+      <a href="#topo" class="nav-logo">JJ</a>
+      <div class="nav-direita">
+        <nav>
+          <ul class="nav-links">
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#entregas">Entregas</a></li>
+            <li><a href="#manifesto">Manifesto</a></li>
+            <li><a href="#contato">Contato</a></li>
+          </ul>
+        </nav>
+        
+        <!-- Interruptor (Toggle Switch) para Alternar Tema -->
+        <div class="theme-switch-wrapper">
+          <label class="theme-switch" for="toggle-tema" aria-label="Alternar tema claro e escuro">
+            <input type="checkbox" id="toggle-tema">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="topo">
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <canvas id="canvas-particles"></canvas>
+
+      <div class="container hero-content">
+        <div class="avatar-circulo" aria-label="Avatar de João Lucas">
+          <span>JJ</span>
+        </div>
+
+        <h1 class="nome-gigante">João Lucas</h1>
+
+        <p class="frase-hero">fanático pelo flamengo, gostando sempre de futebol e outros esportes e sempre de games</p>
+
+        <div class="pills-container">
+          <span class="pill">Flamengo</span>
+          <span class="pill">Futebol</span>
+          <span class="pill">FIFA</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="divisoria-ziguezague" aria-hidden="true"></div>
+
+    <!-- SOBRE MIM -->
+    <section class="secao" id="sobre">
+      <div class="container">
+        <h2 class="titulo-secao tom-descontraido">Sobre Mim</h2>
+
+        <div class="caixa-exclusiva">
+          <div class="item-exclusivo">
+            <span class="rotulo">Time</span>
+            <span class="valor">Flamengo</span>
+          </div>
+          <div class="item-exclusivo">
+            <span class="rotulo">Jogo Favorito</span>
+            <span class="valor">BMPES</span>
+          </div>
+          <div class="item-exclusivo">
+            <span class="rotulo">Música</span>
+            <span class="valor">Astrothunder - Travis Scott</span>
+          </div>
+          <div class="item-exclusivo">
+            <span class="rotulo">Hobby</span>
+            <span class="valor">Assistir Tênis</span>
+          </div>
+          <div class="item-exclusivo">
+            <span class="rotulo">Cidade / Idade</span>
+            <span class="valor">15 anos, Varginha</span>
+          </div>
+          <div class="item-exclusivo">
+            <span class="rotulo">Curso</span>
+            <span class="valor">Informática para Internet</span>
+          </div>
+        </div>
+
+        <div class="sobre-paragrafos">
+          <p>Eu, João Lucas gosto muito de futebol, não importa o que estou fazendo no meu tempo livre ou estou assistindo futebol ou jogando futebol, além do futebol gosto de jogar jogos como GTA,BMPES,FARCRY 3 e GARRY'S MOD e LEFT FOR DEAD 2 com MOD etc.</p>
+          <p>Falando mais sobre mim, eu sou um cara bem mais sério, porém com os amigos sompre se abrindo mais .</p>
+          <p><strong>Meta de futuro:</strong> Seguir trabalhando com a área de tecnologia da Informação.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="divisoria-ziguezague" aria-hidden="true"></div>
+
+    <!-- ENTREGAS -->
+    <section class="secao" id="entregas">
+      <div class="container">
+        <h2 class="titulo-secao tom-descontraido">Minhas Entregas</h2>
+        <p>Clica ou passa o mouse no card pra ver os detalhes de cada trabalho!</p>
+
+        <div class="grade-cards">
+          <!-- Card 1 -->
+          <div class="card-flip" tabindex="0">
+            <div class="card-inner">
+              <div class="card-frente">
+                <div>
+                  <span class="card-numero">ENTREGA #01</span>
+                  <h3 class="card-titulo">Capa do Meu Álbum</h3>
+                </div>
+                <div class="card-imagem-container">
+                  <svg class="card-imagem-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 14.5c-2.49 0-4.5-2.01-4.5-4.5S9.51 7.5 12 7.5s4.5 2.01 4.5 4.5-2.01 4.5-4.5 4.5zm0-5.5c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"/></svg>
+                </div>
+                <span class="selo-status selo-concluida">Concluída</span>
+                <span class="dica-virar">Gire para ver →</span>
+              </div>
+              <div class="card-verso">
+                <div>
+                  <span class="card-data">[DATA DA ENTREGA]</span>
+                  <h3 class="card-titulo">Capa do Meu Álbum</h3>
+                  <p class="card-aprendizado">Criei uma identidade visual que expressa meus gostos pessoais e estilo individual.</p>
+                </div>
+                <a href="https://github.com/Jotalucs" target="_blank" rel="noopener noreferrer" class="btn-quadrado">Ver no GitHub</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="card-flip" tabindex="0">
+            <div class="card-inner">
+              <div class="card-frente">
+                <div>
+                  <span class="card-numero">ENTREGA #02</span>
+                  <h3 class="card-titulo">Dashboard Quem Sou Eu</h3>
+                </div>
+                <div class="card-imagem-container">
+                  <svg class="card-imagem-svg" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                </div>
+                <span class="selo-status selo-concluida">Concluída</span>
+                <span class="dica-virar">Gire para ver →</span>
+              </div>
+              <div class="card-verso">
+                <div>
+                  <span class="card-data">[DATA DA ENTREGA]</span>
+                  <h3 class="card-titulo">Dashboard Quem Sou Eu</h3>
+                  <p class="card-aprendizado">Aprendi a estruturar dados e informações pessoais de forma visual e organizada.</p>
+                </div>
+                <a href="https://github.com/Jotalucs" target="_blank" rel="noopener noreferrer" class="btn-quadrado">Ver no GitHub</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="card-flip" tabindex="0">
+            <div class="card-inner">
+              <div class="card-frente">
+                <div>
+                  <span class="card-numero">ENTREGA #03</span>
+                  <h3 class="card-titulo">Árvore das Profissões 2.0</h3>
+                </div>
+                <div class="card-imagem-container">
+                  <svg class="card-imagem-svg" viewBox="0 0 24 24"><path d="M22 11V3h-7v3H9V3H2v8h7V8h2v10h4v3h7v-8h-7v3h-2V8h2v3h7z"/></svg>
+                </div>
+                <span class="selo-status selo-concluida">Concluída</span>
+                <span class="dica-virar">Gire para ver →</span>
+              </div>
+              <div class="card-verso">
+                <div>
+                  <span class="card-data">[DATA DA ENTREGA]</span>
+                  <h3 class="card-titulo">Árvore das Profissões 2.0</h3>
+                  <p class="card-aprendizado">Mapeei oportunidades no mercado de TI para planejar meus próximos passos profissionais.</p>
+                </div>
+                <a href="https://github.com/Jotalucs" target="_blank" rel="noopener noreferrer" class="btn-quadrado">Ver no GitHub</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="card-flip" tabindex="0">
+            <div class="card-inner">
+              <div class="card-frente">
+                <div>
+                  <span class="card-numero">ENTREGA #04</span>
+                  <h3 class="card-titulo">Âncoras de Carreira</h3>
+                </div>
+                <div class="card-imagem-container">
+                  <svg class="card-imagem-svg" viewBox="0 0 24 24"><path d="M12 2c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 17l1.42 1.42 1.04-1.04C8.35 18.4 10.1 19 12 19c1.9 0 3.65-.6 5.19-1.62l1.04 1.04 1.42-1.42-.62-.62C20.26 15.07 21 13.12 21 11c0-4.97-4.03-9-9-9zm0 15c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/></svg>
+                </div>
+                <span class="selo-status selo-concluida">Concluída</span>
+                <span class="dica-virar">Gire para ver →</span>
+              </div>
+              <div class="card-verso">
+                <div>
+                  <span class="card-data">[DATA DA ENTREGA]</span>
+                  <h3 class="card-titulo">Âncoras de Carreira</h3>
+                  <p class="card-aprendizado">Identifiquei meus valores principais para garantir escolhas de trabalho com propósito.</p>
+                </div>
+                <a href="https://github.com/Jotalucs" target="_blank" rel="noopener noreferrer" class="btn-quadrado">Ver no GitHub</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="card-flip em-breve-card" tabindex="0">
+            <div class="card-inner">
+              <div class="card-frente">
+                <div>
+                  <span class="card-numero">ENTREGA #05</span>
+                  <h3 class="card-titulo">Manifesto</h3>
+                </div>
+                <div class="card-imagem-container">
+                  <svg class="card-imagem-svg" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                </div>
+                <span class="selo-status selo-em-breve">Em breve</span>
+                <span class="dica-virar">Gire para ver →</span>
+              </div>
+              <div class="card-verso">
+                <div>
+                  <span class="card-data">[DATA DA ENTREGA]</span>
+                  <h3 class="card-titulo">Manifesto</h3>
+                  <p class="card-aprendizado">Texto de reflexão sobre minha visão de futuro e valores no mundo da tecnologia.</p>
+                </div>
+                <span class="link-desativado">Link indisponível</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divisoria-ziguezague" aria-hidden="true"></div>
+
+    <!-- MANIFESTO -->
+    <section class="secao" id="manifesto">
+      <div class="container">
+        <h2 class="titulo-secao tom-descontraido">Meu Manifesto</h2>
+        <p>Minhas ideias, objetivos e o que pretendo levar pra minha jornada em TI.</p>
+
+        <div class="manifesto-wrapper">
+          <div class="manifesto-conteudo" id="manifesto-conteudo">
+            <div class="manifesto-texto">
+              <p>[MANIFESTO AQUI]</p>
+            </div>
+          </div>
+
+          <button class="btn-quadrado btn-manifesto" id="btn-manifesto" aria-expanded="false" aria-controls="manifesto-conteudo">
+            Ler manifesto completo
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- RODAPÉ -->
+  <footer class="rodape" id="contato">
+    <div class="container rodape-grid">
+      <div class="rodape-info">
+        <h3 class="tom-descontraido">Feito por João Lucas (JJ)</h3>
+        <p>Estudante de TI • Varginha - MG</p>
+      </div>
+
+      <div class="rodape-links">
+        <a href="https://github.com/Jotalucs" target="_blank" rel="noopener noreferrer" class="btn-quadrado">GitHub: Jotalucs</a>
+        <a href="https://instagram.com/hitex_fx" target="_blank" rel="noopener noreferrer" class="btn-quadrado">Instagram: @hitex_fx</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* 1. BARRA DE PROGRESSO DE LEITURA */
+    window.addEventListener('scroll', () => {
+      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('barra-progresso').style.width = scrolled + '%';
+    });
+
+    /* 2. ALTERNAR TEMA VIA INTERRUPTOR (TOGGLE SWITCH) */
+    const toggleTema = document.getElementById('toggle-tema');
+    const htmlEl = document.documentElement;
+
+    toggleTema.addEventListener('change', () => {
+      const novoTema = toggleTema.checked ? 'light' : 'dark';
+      htmlEl.setAttribute('data-theme', novoTema);
+    });
+
+    /* 3. ABRIR / RECOLHER MANIFESTO */
+    const btnManifesto = document.getElementById('btn-manifesto');
+    const manifestoConteudo = document.getElementById('manifesto-conteudo');
+
+    btnManifesto.addEventListener('click', () => {
+      const aberto = manifestoConteudo.classList.toggle('aberto');
+      btnManifesto.setAttribute('aria-expanded', aberto);
+      btnManifesto.textContent = aberto ? 'Fechar manifesto' : 'Ler manifesto completo';
+    });
+
+    /* 4. ANIMAÇÃO DOS CARDS */
+    const cards = document.querySelectorAll('.card-flip');
+    const cardObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('revelado');
+          }, index * 120);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    cards.forEach(card => cardObserver.observe(card));
+
+    /* 5. PARTÍCULAS INTERATIVAS */
+    const canvas = document.getElementById('canvas-particles');
+    const ctx = canvas.getContext('2d');
+    let particlesArray = [];
+    const numberOfParticles = 45;
+
+    function resizeCanvas() {
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const mouse = { x: null, y: null, radius: 120 };
+    window.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    });
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 3 + 1;
+        this.speedX = (Math.random() - 0.5) * 1.2;
+        this.speedY = (Math.random() - 0.5) * 1.2;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
+        if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
+        const dx = mouse.x - this.x;
+        const dy = mouse.y - this.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        if (distance < mouse.radius) {
+          this.x -= dx / 10;
+          this.y -= dy / 10;
+        }
+      }
+      draw() {
+        ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--cor-primaria').trim();
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      particlesArray = [];
+      for (let i = 0; i < numberOfParticles; i++) {
+        particlesArray.push(new Particle());
+      }
+    }
+    initParticles();
+
+    function connectParticles() {
+      const colorPrimary = getComputedStyle(document.documentElement).getPropertyValue('--cor-primaria').trim();
+      for (let a = 0; a < particlesArray.length; a++) {
+        for (let b = a; b < particlesArray.length; b++) {
+          const dx = particlesArray[a].x - particlesArray[b].x;
+          const dy = particlesArray[a].y - particlesArray[b].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < 100) {
+            ctx.strokeStyle = colorPrimary;
+            ctx.globalAlpha = 1 - (distance / 100);
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+            ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+            ctx.stroke();
+            ctx.globalAlpha = 1;
+          }
+        }
+      }
+    }
+
+    function animateParticles() {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particlesArray.forEach(p => { p.update(); p.draw(); });
+      connectParticles();
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+  </script>
+</body>
+</html>
